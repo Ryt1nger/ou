@@ -1,0 +1,36 @@
+name: Tests and submission check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt pytest
+      - name: Test Python code
+        run: |
+          python -m py_compile app.py engine.py solution.py
+          python -m pytest -q
+      - name: Verify platform submission ZIP
+        run: |
+          python scripts/package_submission.py
+          python - <<'PY'
+          import zipfile
+          with zipfile.ZipFile("lex_submission.zip") as z:
+              assert sorted(z.namelist()) == sorted(["solution.py", "engine.py", "requirements.txt"])
+          print("Submission ZIP layout OK")
+          PY
