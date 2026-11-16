@@ -6,7 +6,7 @@
 https://github.com/Ryt1nger/ou
 
 Презентация (Google Диск):
-[ССЫЛКА БУДЕТ ДОБАВЛЕНА ПОСЛЕ ПОЛУЧЕНИЯ ОТ КОМАНДЫ]
+https://drive.google.com/file/d/15yb_eczNfx6VdKga8-9kvYDdwNR7AxTG/view?usp=sharing
 
 Порядок проверки рабочего приложения:
 1. Открыть README.md в репозитории.
