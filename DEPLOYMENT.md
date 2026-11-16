@@ -1,0 +1,45 @@
+# Публикация LEX — рабочее онлайн-демо
+
+**GitHub Pages здесь не подходит для полного приложения:** он отдаёт статические файлы и не запускает FastAPI/DeepSeek. Сначала опубликуйте публичный репозиторий на GitHub, затем подключите его к Vercel (FastAPI) или Render (Docker).
+
+## 1. GitHub
+
+```bash
+git init -b main
+git add .
+git commit -m "LEX hackathon MVP with grounded RAG"
+gh repo create lex-psb --public --source=. --remote=origin --push
+```
+
+Перед пушем: `git status --short` — `.env` не должен отображаться среди отслеживаемых файлов. В публичный репозиторий можно включить только синтетическую базу организаторов, никаких рабочих документов и токенов.
+
+## 2. Vercel
+
+1. Создать новый Project → Import Git Repository → выбрать `lex-psb`.
+2. Framework Preset: **FastAPI** (Vercel поддерживает корневой `app.py` и `requirements.txt`). Build Command и Output Directory оставить пустыми.
+3. Environment Variables (Production и Preview):
+   - `DEEPSEEK_API_KEY` — **секретный**, значение из кабинета DeepSeek;
+   - `DEEPSEEK_BASE_URL` = `https://api.deepseek.com`;
+   - `DEEPSEEK_MODEL` = `deepseek-flash`;
+   - `DEMO_ACCESS_CODE` — отдельная длинная случайная строка, доступная только команде и судьям.
+4. Deploy. Веб-чат и API работают под одним доменом. Проверить `/api/health` (должны быть 21 документ и `api_configured: true`).
+5. Запросить пример: «Какой срок оплаты по договору ПТ-05/2023 с Альфа-Трейдинг?» Интерфейс запросит демо-код и покажет ответ с источниками.
+
+**Важно:** нельзя указывать ключ DeepSeek в GitHub Secrets вместо Vercel Environment Variables и ожидать, что Vercel подхватит его автоматически. Установить его нужно именно в окружении хостинга. Включите лимит расходов в DeepSeek. Демо-код — минимальная защита, не полноценный пользовательский login/rate limit.
+
+## 3. Render (альтернатива)
+
+New Web Service → GitHub Repository → выбрать `lex-psb` → Docker → задать переменные окружения из шага 2 → Deploy. Сервис использует Dockerfile и слушает порт 8000.
+
+## 4. Проверка перед отправкой судьям
+
+```bash
+python -m pytest -q
+python scripts/package_submission.py
+```
+
+Проверить отсутствие ключей в git, открыть публичный URL в приватном окне, пройти сценарии: обычный ответ с пунктом, разные редакции, уточнение, обоснованный отказ, открытие документа, история чатов. Для платформы Hack&Change загружать `lex_submission.zip`, а не Docker-архив.
+
+## Ограничения текущего подтверждения
+
+Пройденные локальные тесты проверяют приложение, транспорт и доступность доказательств с имитацией DeepSeek. До реального API-запроса с валидным ключом нельзя гарантировать качество/скорость генерации. Docker-контейнер также нужно проверить на машине с установленным Docker.

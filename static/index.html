@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101c3d" />
+  <meta name="description" content="LEX — юридический ИИ-ассистент с подтверждением ответов документами. Проект ПСБ Hack&Change 2026." />
+  <title>LEX — юридический ИИ-ассистент</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+<div id="app" class="shell">
+  <aside class="sidebar" id="sidebar" aria-label="Основная навигация">
+    <div class="brand-row" aria-label="LEX">
+      <div class="brand-symbol" aria-hidden="true"><span></span><span></span></div>
+      <div><div class="brand-name">LEX<span class="brand-dot">.</span></div><div class="brand-subtitle">Юридический ИИ-ассистент</div></div>
+    </div>
+    <button class="new-chat-btn" data-action="new-chat"><span class="svg-icon" data-i="plus"></span><span>Новый диалог</span><span class="keycap">+</span></button>
+    <div class="sidebar-section-label">РАБОЧАЯ ОБЛАСТЬ</div>
+    <nav class="primary-nav" aria-label="Разделы">
+      <button class="nav-item active" data-route="chat"><span class="svg-icon" data-i="messages"></span> Чат с ассистентом</button>
+      <button class="nav-item" data-route="docs"><span class="svg-icon" data-i="files"></span> База знаний <span class="nav-count" id="nav-doc-count">21</span></button>
+    </nav>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-label-row"><span>ПОСЛЕДНИЕ ДИАЛОГИ</span><button class="sidebar-icon-btn" id="clear-history" title="Удалить историю" aria-label="Удалить историю"><span class="svg-icon" data-i="trash"></span></button></div>
+    <div id="history-list" class="history-list"></div>
+    <div class="sidebar-bottom">
+      <div class="privacy-note"><span class="svg-icon" data-i="shield"></span><span>Ответы формируются только на основе документов базы знаний</span></div>
+      <div class="sidebar-divider"></div>
+      <div class="organization"><span class="organization-logo">ПСБ</span><span>Hack&Change 2026</span><span class="small-round">Ю</span></div>
+    </div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar">
+      <div class="topbar-left"><button class="mobile-menu icon-button" id="toggle-menu" aria-label="Открыть меню"><span class="svg-icon" data-i="menu"></span></button><div class="breadcrumb"><span class="crumb-muted">Рабочая область</span><span class="crumb-slash">/</span><span id="current-breadcrumb">Новый диалог</span></div></div>
+      <div class="topbar-right"><div class="status-pill" id="api-status"><span class="status-led"></span><span>Проверка API</span></div><div class="document-counter"><span class="svg-icon" data-i="layers"></span><span id="top-doc-counter">21 документ</span></div><button class="top-avatar" title="Юрист">Ю</button></div>
+    </header>
+    <div class="page-area">
+      <section id="view-chat" class="chat-layout">
+        <div class="conversation-column">
+          <div id="chat-scroll" class="chat-scroll"><div id="messages"></div></div>
+          <div id="composer-root" class="composer-root">
+            <div class="composer-wrap"><textarea id="chat-input" rows="1" maxlength="3000" aria-label="Юридический вопрос" placeholder="Задайте юридический вопрос..."></textarea><button id="send-button" class="send-btn" aria-label="Отправить вопрос"><span class="svg-icon" data-i="send"></span></button></div>
+            <div class="composer-hint"><span class="svg-icon" data-i="shield"></span> Ответы требуют проверки по первоисточнику <span>Enter — отправить · Shift+Enter — новая строка</span></div>
+          </div>
+        </div>
+        <aside id="evidence-panel" class="evidence-panel" aria-label="Источники ответа"></aside>
+      </section>
+      <section id="view-docs" class="documents-layout hidden" aria-label="База знаний"></section>
+    </div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
