@@ -1,21 +1,16 @@
 # Публикация LEX — рабочее онлайн-демо
 
-**GitHub Pages здесь не подходит для полного приложения:** он отдаёт статические файлы и не запускает FastAPI/DeepSeek. Сначала опубликуйте публичный репозиторий на GitHub, затем подключите его к Vercel (FastAPI) или Render (Docker).
+**GitHub Pages здесь не подходит для полного приложения:** он отдаёт статические файлы и не запускает FastAPI/DeepSeek. Код уже опубликован в GitHub: https://github.com/Ryt1nger/ou . Для работающего онлайн-демо подключите именно этот репозиторий к Vercel (FastAPI) или Render (Docker).
 
 ## 1. GitHub
 
-```bash
-git init -b main
-git add .
-git commit -m "LEX hackathon MVP with grounded RAG"
-gh repo create lex-psb --public --source=. --remote=origin --push
-```
+Публичный репозиторий уже существует: https://github.com/Ryt1nger/ou . Создавать второй репозиторий не требуется.
 
 Перед пушем: `git status --short` — `.env` не должен отображаться среди отслеживаемых файлов. В публичный репозиторий можно включить только синтетическую базу организаторов, никаких рабочих документов и токенов.
 
 ## 2. Vercel
 
-1. Создать новый Project → Import Git Repository → выбрать `lex-psb`.
+1. Создать новый Project → Import Git Repository → выбрать `Ryt1nger/ou`.
 2. Framework Preset: **FastAPI** (Vercel поддерживает корневой `app.py` и `requirements.txt`). Build Command и Output Directory оставить пустыми.
 3. Environment Variables (Production и Preview):
    - `DEEPSEEK_API_KEY` — **секретный**, значение из кабинета DeepSeek;
@@ -29,7 +24,7 @@ gh repo create lex-psb --public --source=. --remote=origin --push
 
 ## 3. Render (альтернатива)
 
-New Web Service → GitHub Repository → выбрать `lex-psb` → Docker → задать переменные окружения из шага 2 → Deploy. Сервис использует Dockerfile и слушает порт 8000.
+New Web Service → GitHub Repository → выбрать `Ryt1nger/ou` → Docker → задать переменные окружения из шага 2 → Deploy. Сервис использует Dockerfile и слушает порт 8000.
 
 ## 4. Проверка перед отправкой судьям
 
