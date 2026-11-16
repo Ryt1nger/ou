@@ -1,5 +1,12 @@
 # LEX — юридический ИИ-ассистент для ПСБ
 
+## Скачать ZIP для автоматической проверки
+
+**[⬇ Скачать правильный архив для платформы Hack&Change (lex_submission.zip)](https://github.com/Ryt1nger/ou/raw/refs/heads/main/lex_submission.zip)**
+
+Этот архив сформирован GitHub Actions и проверен: `solution.py`, `engine.py`, `requirements.txt` лежат **в корне ZIP**. На платформу загружайте его, а не стандартный `ou-main.zip` из кнопки Code → Download ZIP.
+
+
 ## Ссылки для жюри
 
 - **Исходный код и документация:** [GitHub — LEX](https://github.com/Ryt1nger/ou)
