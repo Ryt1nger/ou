@@ -164,3 +164,9 @@ gh repo create lex-psb --public --source=. --remote=origin --push
 - [Автоматические тесты GitHub Actions](.github/workflows/ci.yml) — тесты и контроль состава ZIP.
 
 **Важно:** корневой `index.html` — самостоятельный интерактивный *макет*. Настоящий веб-чат с юридическими ответами запускается через FastAPI и DeepSeek; GitHub Pages не запускает Python. Без реального ключа DeepSeek и прогонки Docker нельзя утверждать, что все интеграции проверены. Для финальной сдачи по кейсу всё ещё требуется PDF-презентация со ссылкой на репозиторий и порядком проверки на первом слайде.
+
+## Демо на GitHub Pages
+
+Отдельная ветка [`gh-pages`](https://github.com/Ryt1nger/ou/tree/gh-pages) уже содержит только статический интерактивный прототип. Чтобы GitHub включил сайт, откройте [Settings → Pages](https://github.com/Ryt1nger/ou/settings/pages), выберите **Build and deployment → Deploy from a branch → gh-pages → /(root)** и нажмите Save. После появления статуса Published ожидаемый URL: https://ryt1nger.github.io/ou/ . Пока статус Published не проверен, URL нельзя считать работающим.
+
+Это лишь интерфейс с подготовленными ответами, а не полноценный backend. Для интерактивного DeepSeek нужен сервер (Render/Vercel) и `DEEPSEEK_API_KEY` в защищённых переменных окружения хостинга, **не в GitHub**.
